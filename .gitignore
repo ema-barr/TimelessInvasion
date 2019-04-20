@@ -1,12 +1,3 @@
-Skip to content
- github / gitignore
-Code  Pull requests 94  Projects 0  Pulse  Community
-gitignore/Unity.gitignore
-@LucasSteer LucasSteer [Unity] Added leading slashes to ignored directories so that valid su…
-56e3f5a 28 days ago
-@mviranyi @theDrake @Tandoori @shana @qCring @LucasSteer @Frozenfire92 @ahmyi @FutureClemens @shiftkey @ahmedbaracat @matzar @tim-hub @taeminhong @rpistorello @rogersachan @1nfinite9 @owenblacker @mariuz @ksmit799 @jstasiak @kilian442 @jrreed @johnsoncodehk @jephir @ChemiKhazi
-58 lines (45 sloc)  830 Bytes
-    
 # This .gitignore file should be placed at the root of your Unity project directory
 
 /[Ll]ibrary/
@@ -64,7 +55,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-© 2019 GitHub, Inc.
+Â© 2019 GitHub, Inc.
 Terms
 Privacy
 Security
