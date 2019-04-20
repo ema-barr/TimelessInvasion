@@ -21,15 +21,9 @@ public class WalkingState : State<Player>
 
     public override void ExecuteState(Player owner)
     {
-        if (owner.ChangeMovement == Vector3.zero)
-        {
-            owner.StopPlayer();
-            owner.GetFSM().ChangeState(IdleState.Instance());
-           
-        } else
-        {
-            owner.MovePlayer();
-        }
+        
+         owner.MovePlayer();
+        
     }
 
     public override void ExitState(Player owner)

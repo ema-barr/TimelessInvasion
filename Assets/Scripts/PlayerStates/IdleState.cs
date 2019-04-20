@@ -22,13 +22,9 @@ public class IdleState : State<Player>
 
     public override void ExecuteState(Player owner)
     {
-        if (owner.ChangeMovement != Vector3.zero)
-        {
-            owner.GetFSM().ChangeState(WalkingState.Instance());
-        } else
-        {
-            owner.StopPlayer();
-        }
+        
+        owner.StopPlayer();
+        
     }
 
     public override void ExitState(Player owner)

@@ -50,6 +50,14 @@ public class Player : MonoBehaviour
         } else 
         {
             GetMovement();
+            if (changeMovement == Vector3.zero)
+            {
+                stateMachine.ChangeState(IdleState.Instance());
+            }
+            else
+            {
+                stateMachine.ChangeState(WalkingState.Instance());
+            }
         }
 
         stateMachine.Update();
