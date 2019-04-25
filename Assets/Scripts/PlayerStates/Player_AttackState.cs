@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class AttackState : State<Player>
+public class Player_AttackState : State<Player>
 {
-    private static AttackState _instance;
+    private static Player_AttackState _instance;
     private bool alreadyAttacked = false;
 
-    public static AttackState Instance()
+    public static Player_AttackState Instance()
     {
         if (_instance == null)
-            _instance = new AttackState();
+            _instance = new Player_AttackState();
 
         return _instance;
     }
@@ -30,7 +30,7 @@ public class AttackState : State<Player>
             if (alreadyAttacked)
             {
                 alreadyAttacked = false;
-                owner.GetFSM().ChangeState(IdleState.Instance());
+                owner.GetFSM().ChangeState(Player_IdleState.Instance());
             }
 
         }

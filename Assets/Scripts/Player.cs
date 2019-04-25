@@ -15,10 +15,21 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float speed = 0;
+    [SerializeField]
+    private float staggerTime;
     
     public Animator Animator { get => animator; set => animator = value; }
     public Vector3 ChangeMovement { get => changeMovement; set => changeMovement = value; }
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
+    public bool IsStaggered { get => isStaggered; set => isStaggered = value; }
+
+    public FloatValue currentHealth;
+    public Signal playerHealthSignal;
+
+    public bool isDead = false;
+
+    private bool isStaggered = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +44,7 @@ public class Player : MonoBehaviour
 
         //Setting the State Machine
         stateMachine = new StateMachine<Player>(this);
-        stateMachine.currentState = IdleState.Instance();
+        stateMachine.currentState = Player_IdleState.Instance();
     }
 
     // Update is called once per frame
@@ -44,21 +55,25 @@ public class Player : MonoBehaviour
 
     private void InputHandler()
     {
-        if (Input.GetButton("Attack") && !isAttacking)
+        if (!isDead)
         {
-            stateMachine.ChangeState(AttackState.Instance());
-        } else 
-        {
-            GetMovement();
-            if (changeMovement == Vector3.zero)
+            if (Input.GetButton("Attack") && !isAttacking)
             {
-                stateMachine.ChangeState(IdleState.Instance());
+                stateMachine.ChangeState(Player_AttackState.Instance());
             }
             else
             {
-                stateMachine.ChangeState(WalkingState.Instance());
+                GetMovement();
+                if (changeMovement == Vector3.zero)
+                {
+                    stateMachine.ChangeState(Player_IdleState.Instance());
+                }
+                else
+                {
+                    stateMachine.ChangeState(Player_WalkingState.Instance());
+                }
             }
-        }
+        } 
 
         stateMachine.Update();
     }
@@ -112,5 +127,50 @@ public class Player : MonoBehaviour
 
         isAttacking = false;
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth.currentValue -= damage;
+        playerHealthSignal.Raise();
+
+        CheckDeath();
+
+        if (!isDead)
+        {
+            stateMachine.ChangeState(Player_DamagedState.Instance());
+        }
+       
+    }
+
+    private void CheckDeath()
+    {
+        if (currentHealth.currentValue <= 0)
+        {
+            isDead = true;
+            stateMachine.ChangeState(Player_DeadState.Instance());
+        }
+    }
+
+    public void Die()
+    {
+        animator.SetBool("dead", true);
+    }
+
+    public void Stagger()
+    {
+        isStaggered = true;
+        animator.SetBool("damaged", true);
+        StartCoroutine(StaggerCo());
+    }
+
+    private IEnumerator StaggerCo()
+    {
+        yield return null;
+
+        animator.SetBool("damaged", false);
+
+        yield return new WaitForSeconds(staggerTime);
+        isStaggered = false;
     }
 }

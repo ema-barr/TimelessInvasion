@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : State<Player>
+public class Player_WalkingState : State<Player>
 {
-    private static IdleState _instance = null;
+    private static Player_WalkingState _instance = null;
 
-    public static IdleState Instance()
+    public static Player_WalkingState Instance()
     {
         if (_instance == null)
-            _instance = new IdleState();
+            _instance = new Player_WalkingState();
 
         return _instance;
     }
@@ -19,17 +19,15 @@ public class IdleState : State<Player>
         
     }
 
-
     public override void ExecuteState(Player owner)
     {
         
-        owner.StopPlayer();
+         owner.MovePlayer();
         
     }
 
     public override void ExitState(Player owner)
     {
-        
+       
     }
-   
 }
