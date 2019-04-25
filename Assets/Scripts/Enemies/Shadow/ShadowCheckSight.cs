@@ -5,17 +5,24 @@ using UnityEngine;
 public class ShadowCheckSight : MonoBehaviour
 {
     [SerializeField]
-    private Signal inSightSignal;
+    private Signal inSightSignalOn;
+    [SerializeField]
+    private Signal inSightSignalOff;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
-            inSightSignal.Raise();
+            inSightSignalOn.Raise();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
-            inSightSignal.Raise();
+            inSightSignalOff.Raise();
+    }
+
+    private void OnDisable()
+    {
+        inSightSignalOff.Raise();
     }
 }

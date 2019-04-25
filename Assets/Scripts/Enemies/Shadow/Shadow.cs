@@ -23,18 +23,16 @@ public class Shadow : Enemy
         stateMachine.Update();
     }
 
-    public void SwitchAttack()
+    public void SwitchAttackOn()
     {
-        isAttacking = !isAttacking;
-        Debug.Log(isAttacking);
-        if (isAttacking)
-        {
-            anim.SetBool("isAttacking", true);
-            stateMachine.ChangeState(Shadow_AttackState.Instance());
-        } else
-        {
-            anim.SetBool("isAttacking", false);
-            stateMachine.ChangeState(Shadow_IdleState.Instance());
-        }
+        anim.SetBool("isAttacking", true);
+        stateMachine.ChangeState(Shadow_AttackState.Instance());
+        
+    }
+
+    public void SwitchAttackOff()
+    {
+        anim.SetBool("isAttacking", false);
+        stateMachine.ChangeState(Shadow_IdleState.Instance());
     }
 }

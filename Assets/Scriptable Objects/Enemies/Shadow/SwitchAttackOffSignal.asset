@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40b565f665245eb45972631de233420c, type: 3}
-  m_Name: SwitchAttackSignal
+  m_Name: SwitchAttackOnSignal
   m_EditorClassIdentifier: 
   listeners: []

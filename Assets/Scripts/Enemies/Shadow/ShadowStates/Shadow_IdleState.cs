@@ -21,9 +21,7 @@ public class Shadow_IdleState : State<Shadow>
 
     public override void ExecuteState(Shadow owner)
     {
-
-        
-
+       
     }
 
     public override void ExitState(Shadow owner)
