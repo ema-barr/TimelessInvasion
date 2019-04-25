@@ -173,6 +173,7 @@ MonoBehaviour:
   castTime: 1.5
   spellPrefab: {fileID: 6495321572366570015, guid: 45196c498fc74ae44a66d37324b69668,
     type: 3}
+  hitbox: {fileID: 4650448545141650239}
   isCasting: 0
 --- !u!61 &4650448545141650226
 BoxCollider2D:

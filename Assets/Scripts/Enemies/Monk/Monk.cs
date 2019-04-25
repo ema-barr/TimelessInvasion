@@ -20,8 +20,6 @@ public class Monk :Enemy
     private GameObject spellPrefab;
 
 
-    private BoxCollider2D hitbox;
-
 
     private StateMachine<Monk> stateMachine;
 
@@ -35,7 +33,6 @@ public class Monk :Enemy
 
     private void Start()
     {
-        hitbox = GetComponent<BoxCollider2D>();
         myRigidbody = GetComponent<Rigidbody2D>();
 
         anim = GetComponent<Animator>();
@@ -181,6 +178,12 @@ public class Monk :Enemy
     public void Die()
     {
         anim.SetBool("isDead", true);
-        hitbox.enabled = false;
+        BoxCollider2D[] hitboxList = GetComponents<BoxCollider2D>();
+
+        foreach (BoxCollider2D hitbox in hitboxList)
+        {
+            hitbox.enabled = false;
+        }
+       
     }
 }
