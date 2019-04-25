@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4529c824d52f77848aca6714f942e5b1, type: 3}
   m_Name: ShadowHealth
   m_EditorClassIdentifier: 
-  initialValue: 0
-  currentValue: 0
+  initialValue: 1
+  currentValue: 1
