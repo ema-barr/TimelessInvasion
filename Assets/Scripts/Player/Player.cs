@@ -155,6 +155,11 @@ public class Player : MonoBehaviour
     public void Die()
     {
         animator.SetBool("dead", true);
+        BoxCollider2D[] listColliders = GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D collider in listColliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     public void Stagger()
