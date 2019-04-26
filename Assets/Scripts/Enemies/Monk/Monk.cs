@@ -30,6 +30,8 @@ public class Monk :Enemy
 
     private GameObject currentExitPoint;
 
+    private Coroutine castCoroutine = null;
+
 
 
     private StateMachine<Monk> stateMachine;
@@ -67,7 +69,11 @@ public class Monk :Enemy
             CheckDistance();
         } else if (stateMachine.currentState != Monk_DeadState.Instance())
         {
-            StopAllCoroutines();
+            if (castCoroutine != null)
+            {
+                StopCoroutine(castCoroutine);
+                castCoroutine = null;
+            }
             stateMachine.ChangeState(Monk_DeadState.Instance());
         }
         
@@ -169,15 +175,17 @@ public class Monk :Enemy
     {
         anim.SetBool("isAttacking", true);
         isCasting = true;
-        StartCoroutine(CastCo());
+        castCoroutine = StartCoroutine(CastCo());
     }
 
     private IEnumerator CastCo()
     {
         yield return new WaitForSeconds(castTime);
+        castCoroutine = null;
         CastSpell();
         isCasting = false;
         anim.SetBool("isAttacking", false);
+
     }
 
     private void CastSpell()

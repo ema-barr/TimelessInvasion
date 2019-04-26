@@ -25,6 +25,8 @@ public class GreyClaw : Enemy
 
     private Rigidbody2D myRigidbody;
 
+    private Coroutine attackCoroutine = null;
+
     [HideInInspector]
     public bool isAttacking;
 
@@ -53,7 +55,11 @@ public class GreyClaw : Enemy
         }
         else if (stateMachine.currentState != GreyClaw_DeadState.Instance())
         {
-            StopAllCoroutines();
+            if (attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
             stateMachine.ChangeState(GreyClaw_DeadState.Instance());
         }
 
@@ -148,13 +154,15 @@ public class GreyClaw : Enemy
     {
         anim.SetBool("isAttacking", true);
         isAttacking = true;
-        StartCoroutine(AttackCo());
+        attackCoroutine = StartCoroutine(AttackCo());
     }
 
     private IEnumerator AttackCo()
     {
         yield return null;
         anim.SetBool("isAttacking", false);
+
+        attackCoroutine = null;
 
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;
@@ -170,6 +178,11 @@ public class GreyClaw : Enemy
         StopAllCoroutines();
         anim.SetBool("isDead", true);
         StartCoroutine(DieCo());
+        BoxCollider2D[] listColliders = GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D collider in listColliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     private IEnumerator DieCo()

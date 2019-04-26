@@ -1040,6 +1040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TriggerDialog
       objectReference: {fileID: 0}
+    - target: {fileID: 6712192127263946974, guid: e894d538a002d6840af8781b0a3d442f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6712192127263946975, guid: e894d538a002d6840af8781b0a3d442f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1123,6 +1128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreyClaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947374440106142148, guid: 67a7ce992381c9547af1a555b7813e5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6947374440106142150, guid: 67a7ce992381c9547af1a555b7813e5b,
         type: 3}
