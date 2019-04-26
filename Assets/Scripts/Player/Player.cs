@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         yield return null;
 
         animator.SetBool("isAttacking", false);
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.05f);
        
 
         isAttacking = false;

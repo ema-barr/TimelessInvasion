@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,8 +26,9 @@ public class ActivateDialog : MonoBehaviour
         {
             dialogOnSignal.Raise();
             Activate();
+            this.gameObject.SetActive(false);
         }
-        this.gameObject.SetActive(false);
+        
     }
 
     public void Activate()
