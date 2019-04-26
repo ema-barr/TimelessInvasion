@@ -211,5 +211,11 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(Player_IdleState.Instance());
     }
 
-    
+    public void Heal(float healing)
+    {
+        float newHealth = currentHealth.currentValue + healing;
+        newHealth = Mathf.Min(newHealth, currentHealth.initialValue);
+        currentHealth.currentValue = newHealth;
+        playerHealthSignal.Raise();
+    }
 }
