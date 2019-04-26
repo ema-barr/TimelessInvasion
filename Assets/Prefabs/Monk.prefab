@@ -325,7 +325,7 @@ MonoBehaviour:
   target: {fileID: 0}
   chaseRadius: 20
   attackRadius: 5
-  castTime: 1.5
+  castTime: 1.7
   spellPrefab: {fileID: 6495321572366570015, guid: 45196c498fc74ae44a66d37324b69668,
     type: 3}
   exitPointUp: {fileID: 15924635}
