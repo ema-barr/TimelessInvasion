@@ -212,7 +212,7 @@ MonoBehaviour:
   staggerTime: 0
   maxHealth: {fileID: 11400000, guid: 50a72692f8a2ad945affd9083d6051fd, type: 2}
   target: {fileID: 0}
-  chaseRadius: 3
+  chaseRadius: 7
   attackRadius: 0.59
   attackDelay: 0.5
   deathDelay: 2.3
