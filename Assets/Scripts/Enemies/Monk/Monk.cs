@@ -19,6 +19,17 @@ public class Monk :Enemy
     [SerializeField]
     private GameObject spellPrefab;
 
+    [SerializeField]
+    private GameObject exitPointUp;
+    [SerializeField]
+    private GameObject exitPointDown;
+    [SerializeField]
+    private GameObject exitPointRight;
+    [SerializeField]
+    private GameObject exitPointLeft;
+
+    private GameObject currentExitPoint;
+
 
 
     private StateMachine<Monk> stateMachine;
@@ -27,6 +38,7 @@ public class Monk :Enemy
 
     private Rigidbody2D myRigidbody;
 
+    [HideInInspector]
     public bool isCasting;
 
 
@@ -119,10 +131,12 @@ public class Monk :Enemy
             if (direction.x > 0)
             {
                 SetAnimFloat(Vector2.right);
+                currentExitPoint = exitPointRight;
             }
             else if (direction.x < 0)
             {
                 SetAnimFloat(Vector2.left);
+                currentExitPoint = exitPointLeft;
             }
         }
         else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
@@ -130,10 +144,12 @@ public class Monk :Enemy
             if (direction.y > 0)
             {
                 SetAnimFloat(Vector2.up);
+                currentExitPoint = exitPointUp;
             }
             else if (direction.y < 0)
             {
                 SetAnimFloat(Vector2.down);
+                currentExitPoint = exitPointDown;
             }
         }
     }
@@ -166,7 +182,7 @@ public class Monk :Enemy
 
     private void CastSpell()
     {
-        Instantiate(spellPrefab, transform.position, Quaternion.identity);
+        Instantiate(spellPrefab, currentExitPoint.transform.position, Quaternion.identity);
 
     }
 
