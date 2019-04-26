@@ -7,6 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private string firstLevel;
+    [SerializeField]
+    private GameObject creditsPanel;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +31,10 @@ public class MainMenu : MonoBehaviour
     public void QuitToDesktop()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        creditsPanel.SetActive(true);
     }
 }
