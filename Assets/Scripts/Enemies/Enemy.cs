@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Damage");
         IsStaggered = true;
         StartCoroutine(StaggerCo());
        

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Monk :Enemy
+public class GreyClaw : Enemy
 {
     [SerializeField]
     private Transform target;
@@ -14,34 +14,19 @@ public class Monk :Enemy
     private float attackRadius;
 
     [SerializeField]
-    private float castTime;
+    private float attackDelay;
 
     [SerializeField]
-    private GameObject spellPrefab;
+    private float deathDelay;
 
-    [SerializeField]
-    private GameObject exitPointUp;
-    [SerializeField]
-    private GameObject exitPointDown;
-    [SerializeField]
-    private GameObject exitPointRight;
-    [SerializeField]
-    private GameObject exitPointLeft;
-
-    private GameObject currentExitPoint;
-
-
-
-    private StateMachine<Monk> stateMachine;
+    private StateMachine<GreyClaw> stateMachine;
 
     private Animator anim;
 
     private Rigidbody2D myRigidbody;
 
     [HideInInspector]
-    public bool isCasting;
-
-
+    public bool isAttacking;
 
     private void Start()
     {
@@ -51,13 +36,13 @@ public class Monk :Enemy
         anim.SetFloat("moveX", 0f);
         anim.SetFloat("moveY", -1f);
 
-        isCasting = false;
-        
+        isAttacking = false;
+
         target = GameObject.FindWithTag("Player").transform;
 
-        stateMachine = new StateMachine<Monk>(this);
-        
-        stateMachine.currentState = Monk_IdleState.Instance();
+        stateMachine = new StateMachine<GreyClaw>(this);
+
+        stateMachine.currentState = GreyClaw_IdleState.Instance();
     }
 
     private void FixedUpdate()
@@ -65,12 +50,13 @@ public class Monk :Enemy
         if (health > 0)
         {
             CheckDistance();
-        } else if (stateMachine.currentState != Monk_DeadState.Instance())
+        }
+        else if (stateMachine.currentState != GreyClaw_DeadState.Instance())
         {
             StopAllCoroutines();
-            stateMachine.ChangeState(Monk_DeadState.Instance());
+            stateMachine.ChangeState(GreyClaw_DeadState.Instance());
         }
-        
+
         stateMachine.Update();
     }
 
@@ -85,27 +71,29 @@ public class Monk :Enemy
                     //Attack state
 
                     ChangeAnim(target.position - transform.position);
-                    stateMachine.ChangeState(Monk_AttackState.Instance());
+                    stateMachine.ChangeState(GreyClaw_AttackState.Instance());
                 }
-                else if (!isCasting)
+                else if (!isAttacking)
                 {
                     //Chase state
-                    stateMachine.ChangeState(Monk_WalkingState.Instance());
+                    stateMachine.ChangeState(GreyClaw_WalkingState.Instance());
                 }
             }
             else
             {
                 //Idle State
-                stateMachine.ChangeState(Monk_IdleState.Instance());
+                stateMachine.ChangeState(GreyClaw_IdleState.Instance());
             }
-        } else
+        }
+        else
         {
             //If player is dead
             ChangeAnim(Vector2.down);
             StopAllCoroutines();
         }
-        
+
     }
+
 
 
     public void Move()
@@ -121,7 +109,7 @@ public class Monk :Enemy
 
     public void StopMove()
     {
-        
+
     }
 
     private void ChangeAnim(Vector2 direction)
@@ -131,12 +119,10 @@ public class Monk :Enemy
             if (direction.x > 0)
             {
                 SetAnimFloat(Vector2.right);
-                currentExitPoint = exitPointRight;
             }
             else if (direction.x < 0)
             {
                 SetAnimFloat(Vector2.left);
-                currentExitPoint = exitPointLeft;
             }
         }
         else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
@@ -144,12 +130,10 @@ public class Monk :Enemy
             if (direction.y > 0)
             {
                 SetAnimFloat(Vector2.up);
-                currentExitPoint = exitPointUp;
             }
             else if (direction.y < 0)
             {
                 SetAnimFloat(Vector2.down);
-                currentExitPoint = exitPointDown;
             }
         }
     }
@@ -160,46 +144,37 @@ public class Monk :Enemy
         anim.SetFloat("moveY", setVector.y);
     }
 
-    public StateMachine<Monk> GetFSM()
+    public void StartAttacking()
+    {
+        anim.SetBool("isAttacking", true);
+        isAttacking = true;
+        StartCoroutine(AttackCo());
+    }
+
+    private IEnumerator AttackCo()
+    {
+        yield return null;
+        anim.SetBool("isAttacking", false);
+
+        yield return new WaitForSeconds(attackDelay);
+        isAttacking = false;
+    }
+
+    public StateMachine<GreyClaw> GetFSM()
     {
         return stateMachine;
     }
 
-    public void StartCasting()
-    {
-        anim.SetBool("isAttacking", true);
-        isCasting = true;
-        StartCoroutine(CastCo());
-    }
-
-    private IEnumerator CastCo()
-    {
-        yield return new WaitForSeconds(castTime);
-        CastSpell();
-        isCasting = false;
-        anim.SetBool("isAttacking", false);
-    }
-
-    private void CastSpell()
-    {
-        Instantiate(spellPrefab, currentExitPoint.transform.position, Quaternion.identity);
-
-    }
-
-    public override void Death()
-    {
-        stateMachine.ChangeState(Monk_DeadState.Instance());
-    }
-
     public void Die()
     {
+        StopAllCoroutines();
         anim.SetBool("isDead", true);
-        BoxCollider2D[] hitboxList = GetComponents<BoxCollider2D>();
+        StartCoroutine(DieCo());
+    }
 
-        foreach (BoxCollider2D hitbox in hitboxList)
-        {
-            hitbox.enabled = false;
-        }
-       
+    private IEnumerator DieCo()
+    {
+        yield return new WaitForSeconds(deathDelay);
+        Destroy(this.gameObject);
     }
 }

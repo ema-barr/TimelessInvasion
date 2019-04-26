@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  staggerTime: 1
+  staggerTime: 0.7
   currentHealth: {fileID: 11400000, guid: afa5f94bb6b931e4ca7c31069305c927, type: 2}
   playerHealthSignal: {fileID: 11400000, guid: ffe12d3222b43f64d8ea8bea146072a7, type: 2}
   gameOverSignal: {fileID: 11400000, guid: 170a2dc0fab6ca040afda00e6a63c4c4, type: 2}

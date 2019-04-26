@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - DamageDealer
+  - Wall
   layers:
   - Default
   - TransparentFX

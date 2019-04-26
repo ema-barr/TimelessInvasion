@@ -60,6 +60,9 @@ public class Bullet : MonoBehaviour
                 other.GetComponent<Player>().TakeDamage(damage.currentValue);
 
             }
+        } else if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }
