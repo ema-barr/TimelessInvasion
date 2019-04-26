@@ -181,8 +181,8 @@ public class Monk :Enemy
     private IEnumerator CastCo()
     {
         yield return new WaitForSeconds(castTime);
-        castCoroutine = null;
         CastSpell();
+        castCoroutine = null;
         isCasting = false;
         anim.SetBool("isAttacking", false);
 
