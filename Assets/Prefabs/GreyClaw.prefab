@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: 
-  speed: 1
+  speed: 1.5
   staggerTime: 0
   maxHealth: {fileID: 11400000, guid: 50a72692f8a2ad945affd9083d6051fd, type: 2}
   target: {fileID: 0}
