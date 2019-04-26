@@ -73,6 +73,8 @@ MonoBehaviour:
   thrust: 2
   knockTime: 0
   damage: 1
+  canHitEnemies: 1
+  canHitPlayer: 0
 --- !u!1 &3085676695356921914
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +148,8 @@ MonoBehaviour:
   thrust: 2
   knockTime: 0
   damage: 1
+  canHitEnemies: 1
+  canHitPlayer: 0
 --- !u!1 &3085676695473798795
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 51c81c6a55d33ff4f8152a7e9c32a2d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -297,7 +301,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 100
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -321,6 +325,8 @@ MonoBehaviour:
   staggerTime: 1
   currentHealth: {fileID: 11400000, guid: afa5f94bb6b931e4ca7c31069305c927, type: 2}
   playerHealthSignal: {fileID: 11400000, guid: ffe12d3222b43f64d8ea8bea146072a7, type: 2}
+  gameOverSignal: {fileID: 11400000, guid: 170a2dc0fab6ca040afda00e6a63c4c4, type: 2}
+  gameOverPanelDelay: 3
   isDead: 0
 --- !u!61 &3085676695779972806
 BoxCollider2D:
@@ -361,7 +367,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0040923953, y: -0.031030178}
+  m_Offset: {x: -0.0040923953, y: -0.07388526}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -372,7 +378,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3686682, y: 0.5407562}
+  m_Size: {x: 0.3686682, y: 0.45504606}
   m_EdgeRadius: 0
 --- !u!1 &3085676695919081129
 GameObject:
@@ -447,6 +453,8 @@ MonoBehaviour:
   thrust: 2
   knockTime: 0
   damage: 1
+  canHitEnemies: 1
+  canHitPlayer: 0
 --- !u!1 &3085676697098909690
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,3 +528,5 @@ MonoBehaviour:
   thrust: 2
   knockTime: 0
   damage: 1
+  canHitEnemies: 1
+  canHitPlayer: 0

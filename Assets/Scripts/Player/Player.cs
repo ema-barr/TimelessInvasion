@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
     public FloatValue currentHealth;
     public Signal playerHealthSignal;
 
+    [SerializeField]
+    private Signal gameOverSignal;
+    [SerializeField]
+    private float gameOverPanelDelay;
+
+    [HideInInspector]
     public bool isDead = false;
 
     private bool isStaggered = false;
@@ -34,6 +40,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth.currentValue = currentHealth.initialValue;
+
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
 
@@ -160,6 +168,14 @@ public class Player : MonoBehaviour
         {
             collider.enabled = false;
         }
+
+        StartCoroutine(GameOverCo());
+    }
+
+    public IEnumerator GameOverCo()
+    {
+        yield return new WaitForSeconds(gameOverPanelDelay);
+        gameOverSignal.Raise();
     }
 
     public void Stagger()

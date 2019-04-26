@@ -10,6 +10,11 @@ public class DamageSystem : MonoBehaviour
     private float knockTime;
     [SerializeField]
     private float damage;
+    [SerializeField]
+    private bool canHitEnemies;
+    [SerializeField]
+    private bool canHitPlayer;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -29,7 +34,7 @@ public class DamageSystem : MonoBehaviour
         if (hit != null)
         {
 
-            if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
+            if (other.gameObject.CompareTag("Enemy") && canHitEnemies && other.isTrigger)
             {
                 if (!other.GetComponent<Enemy>().IsStaggered)
                 {
@@ -37,7 +42,7 @@ public class DamageSystem : MonoBehaviour
                 }
                 
             }
-            if (other.gameObject.CompareTag("Player") && other.isTrigger)
+            if (other.gameObject.CompareTag("Player") && canHitPlayer && other.isTrigger)
             {
                 if (!other.GetComponent<Player>().IsStaggered)
                 {
