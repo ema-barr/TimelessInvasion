@@ -21,12 +21,7 @@ public class Player_InteractionState : State<Player>
 
     public override void ExecuteState(Player owner)
     {
-        /*
-        if (Input.GetButtonDown("NextDialog"))
-        {
-            owner.DeactivateDialogState();
-        }
-        */
+        
     }
 
     public override void ExitState(Player owner)

@@ -31,12 +31,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float gameOverPanelDelay;
 
-    [SerializeField]
-    private GameObject dialogPanel;
-
     [HideInInspector]
     public bool isDead = false;
 
+    private bool dialogIsActive = false;
     private bool isStaggered = false;
     
 
@@ -201,7 +199,7 @@ public class Player : MonoBehaviour
         isStaggered = false;
     }
 
-    public void ActiveDialogState()
+    public void ActivateDialogState()
     {
         Time.timeScale = 0f;
         stateMachine.ChangeState(Player_InteractionState.Instance());
@@ -209,8 +207,9 @@ public class Player : MonoBehaviour
 
     public void DeactivateDialogState()
     {
-        dialogPanel.SetActive(false);
         Time.timeScale = 1f;
         stateMachine.ChangeState(Player_IdleState.Instance());
     }
+
+    
 }

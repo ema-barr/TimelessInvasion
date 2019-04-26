@@ -17,11 +17,14 @@ public class ActivateDialog : MonoBehaviour
     [SerializeField]
     private string dialog;
 
+    [SerializeField]
+    private Signal dialogOnSignal;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<Player>().ActiveDialogState();
+            dialogOnSignal.Raise();
             Activate();
         }
     }
@@ -30,11 +33,7 @@ public class ActivateDialog : MonoBehaviour
     {
         portraitSlot.sprite = portrait;
         text.text = dialog;
-        panel.SetActive(true);
+
     }
 
-    public void Deactivate()
-    {
-        panel.SetActive(false);
-    }
 }

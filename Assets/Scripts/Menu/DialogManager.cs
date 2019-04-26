@@ -5,14 +5,27 @@ using UnityEngine;
 public class DialogManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject player;
+    private GameObject panel;
+    [SerializeField]
+    private Signal dialogOffSignal;
+
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("NextDialog"))
         {
-            player.GetComponent<Player>().DeactivateDialogState();
+            dialogOffSignal.Raise();
         }
+    }
+
+    public void ActivateDialog()
+    {
+        panel.SetActive(true);
+    }
+
+    public void DeactivateDialog()
+    {
+        panel.SetActive(false);
     }
 }
