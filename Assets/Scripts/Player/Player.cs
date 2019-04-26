@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float gameOverPanelDelay;
 
+    [SerializeField]
+    private GameObject dialogPanel;
+
     [HideInInspector]
     public bool isDead = false;
 
@@ -65,20 +68,23 @@ public class Player : MonoBehaviour
     {
         if (!isDead)
         {
-            if (Input.GetButton("Attack") && !isAttacking)
+            if (stateMachine.currentState != Player_InteractionState.Instance())
             {
-                stateMachine.ChangeState(Player_AttackState.Instance());
-            }
-            else
-            {
-                GetMovement();
-                if (changeMovement == Vector3.zero)
+                if (Input.GetButton("Attack") && !isAttacking)
                 {
-                    stateMachine.ChangeState(Player_IdleState.Instance());
+                    stateMachine.ChangeState(Player_AttackState.Instance());
                 }
                 else
                 {
-                    stateMachine.ChangeState(Player_WalkingState.Instance());
+                    GetMovement();
+                    if (changeMovement == Vector3.zero)
+                    {
+                        stateMachine.ChangeState(Player_IdleState.Instance());
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(Player_WalkingState.Instance());
+                    }
                 }
             }
         } 
@@ -193,5 +199,18 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(staggerTime);
         isStaggered = false;
+    }
+
+    public void ActiveDialogState()
+    {
+        Time.timeScale = 0f;
+        stateMachine.ChangeState(Player_InteractionState.Instance());
+    }
+
+    public void DeactivateDialogState()
+    {
+        dialogPanel.SetActive(false);
+        Time.timeScale = 1f;
+        stateMachine.ChangeState(Player_IdleState.Instance());
     }
 }

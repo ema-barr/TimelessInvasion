@@ -255,8 +255,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 370331281
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 51c81c6a55d33ff4f8152a7e9c32a2d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -327,6 +327,7 @@ MonoBehaviour:
   playerHealthSignal: {fileID: 11400000, guid: ffe12d3222b43f64d8ea8bea146072a7, type: 2}
   gameOverSignal: {fileID: 11400000, guid: 170a2dc0fab6ca040afda00e6a63c4c4, type: 2}
   gameOverPanelDelay: 3
+  dialogPanel: {fileID: 0}
   isDead: 0
 --- !u!61 &3085676695779972806
 BoxCollider2D:
