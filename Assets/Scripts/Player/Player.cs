@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth.currentValue = currentHealth.initialValue;
+        playerHealthSignal.Raise();
 
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
