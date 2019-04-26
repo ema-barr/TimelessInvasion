@@ -11,11 +11,18 @@ public class GameOverMenu : MonoBehaviour
     private string mainMenu;
     [SerializeField]
     private string sceneToRetry;
+    [SerializeField]
+    private GameObject[] elementsToDeactivate;
     
 
     public void EnablePanel()
     {
         gameOverPanel.SetActive(true);
+
+        foreach(GameObject el in elementsToDeactivate)
+        {
+            el.SetActive(false);
+        }
     }
 
 
