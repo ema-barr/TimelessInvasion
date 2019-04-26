@@ -1109,16 +1109,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4122413382333211842, guid: c872a0f4cc4254846a889d3c66671613,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4122413382333211842, guid: c872a0f4cc4254846a889d3c66671613,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4122413381545516449, guid: c872a0f4cc4254846a889d3c66671613,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1345,11 +1335,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreyClaw
-      objectReference: {fileID: 0}
-    - target: {fileID: 6947374440106142148, guid: 67a7ce992381c9547af1a555b7813e5b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6947374440106142150, guid: 67a7ce992381c9547af1a555b7813e5b,
         type: 3}

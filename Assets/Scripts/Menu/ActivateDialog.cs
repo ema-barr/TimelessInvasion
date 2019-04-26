@@ -27,6 +27,7 @@ public class ActivateDialog : MonoBehaviour
             dialogOnSignal.Raise();
             Activate();
         }
+        this.gameObject.SetActive(false);
     }
 
     public void Activate()
