@@ -17,6 +17,9 @@ public class GreyClaw : Enemy
     private float attackDelay;
 
     [SerializeField]
+    private float attackDelayAfterDamage;
+
+    [SerializeField]
     private float deathDelay;
 
     private StateMachine<GreyClaw> stateMachine;
@@ -25,7 +28,6 @@ public class GreyClaw : Enemy
 
     private Rigidbody2D myRigidbody;
 
-    private Coroutine attackCoroutine = null;
 
     [HideInInspector]
     public bool isAttacking;
@@ -51,15 +53,16 @@ public class GreyClaw : Enemy
     {
         if (health > 0)
         {
+            if (IsStaggered == true)
+            {
+                StopCoroutine("AttackCo");
+                StartCoroutine("AttackCo", attackDelayAfterDamage);
+            }
             CheckDistance();
         }
         else if (stateMachine.currentState != GreyClaw_DeadState.Instance())
         {
-            if (attackCoroutine != null)
-            {
-                StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
-            }
+            StopCoroutine("AttackCo");
             stateMachine.ChangeState(GreyClaw_DeadState.Instance());
         }
 
@@ -95,7 +98,7 @@ public class GreyClaw : Enemy
         {
             //If player is dead
             ChangeAnim(Vector2.down);
-            StopAllCoroutines();
+            StopCoroutine("AttackCo");
         }
 
     }
@@ -154,15 +157,13 @@ public class GreyClaw : Enemy
     {
         anim.SetBool("isAttacking", true);
         isAttacking = true;
-        attackCoroutine = StartCoroutine(AttackCo());
+        StartCoroutine("AttackCo");
     }
 
     private IEnumerator AttackCo()
     {
         yield return null;
         anim.SetBool("isAttacking", false);
-
-        attackCoroutine = null;
 
         yield return new WaitForSeconds(attackDelay);
         isAttacking = false;

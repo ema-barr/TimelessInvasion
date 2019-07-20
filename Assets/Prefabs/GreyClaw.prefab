@@ -215,6 +215,7 @@ MonoBehaviour:
   chaseRadius: 7
   attackRadius: 0.59
   attackDelay: 0.5
+  attackDelayAfterDamage: 1
   deathDelay: 2.3
   isAttacking: 0
 --- !u!1 &6947374440474630195

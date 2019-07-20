@@ -77,7 +77,6 @@ public class Monk :Enemy
         {
             
             StopCoroutine("CastCo");
-            Debug.Log("Stopped");
             
             stateMachine.ChangeState(Monk_DeadState.Instance());
         }
