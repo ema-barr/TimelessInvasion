@@ -17,6 +17,9 @@ public class Monk :Enemy
     private float castTime;
 
     [SerializeField]
+    private float castTimeAfterDamage;
+
+    [SerializeField]
     private GameObject spellPrefab;
 
     [SerializeField]
@@ -29,8 +32,6 @@ public class Monk :Enemy
     private GameObject exitPointLeft;
 
     private GameObject currentExitPoint;
-
-    private Coroutine castCoroutine = null;
 
 
 
@@ -66,14 +67,18 @@ public class Monk :Enemy
     {
         if (health > 0)
         {
+            if (IsStaggered == true)
+            {
+                StopCoroutine("CastCo");
+                StartCoroutine("CastCo", castTimeAfterDamage);
+            }
             CheckDistance();
         } else if (stateMachine.currentState != Monk_DeadState.Instance())
         {
-            if (castCoroutine != null)
-            {
-                StopCoroutine(castCoroutine);
-                castCoroutine = null;
-            }
+            
+            StopCoroutine("CastCo");
+            Debug.Log("Stopped");
+            
             stateMachine.ChangeState(Monk_DeadState.Instance());
         }
         
@@ -108,7 +113,7 @@ public class Monk :Enemy
         {
             //If player is dead
             ChangeAnim(Vector2.down);
-            StopAllCoroutines();
+            StopCoroutine("CastCo");
         }
         
     }
@@ -175,14 +180,13 @@ public class Monk :Enemy
     {
         anim.SetBool("isAttacking", true);
         isCasting = true;
-        castCoroutine = StartCoroutine(CastCo());
+        StartCoroutine("CastCo", castTime);
     }
 
-    private IEnumerator CastCo()
+    private IEnumerator CastCo(float time)
     {
-        yield return new WaitForSeconds(castTime);
+        yield return new WaitForSeconds(time);
         CastSpell();
-        castCoroutine = null;
         isCasting = false;
         anim.SetBool("isAttacking", false);
 

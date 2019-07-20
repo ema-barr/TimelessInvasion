@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d141cc4acfbc345abf3cbc4a679ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: Monk
   speed: 1
   staggerTime: 0.3
   maxHealth: {fileID: 11400000, guid: e8a7bc13c6de38c4aa95ec10775f4299, type: 2}
@@ -326,6 +326,7 @@ MonoBehaviour:
   chaseRadius: 20
   attackRadius: 5
   castTime: 1.7
+  castTimeAfterDamage: 1
   spellPrefab: {fileID: 6495321572366570015, guid: 45196c498fc74ae44a66d37324b69668,
     type: 3}
   exitPointUp: {fileID: 15924635}

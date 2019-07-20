@@ -33,10 +33,6 @@ public class Enemy : MonoBehaviour
         StartCoroutine(StaggerCo());
        
         health -= damage;
-        if (health <= 0)
-        {
-            Death();
-        }
     }
 
     public virtual void Death()
